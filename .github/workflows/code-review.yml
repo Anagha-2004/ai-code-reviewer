@@ -2,13 +2,13 @@ name: Code Review Bot
 
 on:
   pull_request:
-    types: [opened, synchronize]
 
 jobs:
   review:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -18,8 +18,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install torch transformers
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Run Transformer Code Review
-        run: |
-          python .github/scripts/code_review.py
+      - name: Run review
+        run: python review.py
