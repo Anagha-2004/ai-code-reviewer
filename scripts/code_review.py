@@ -27,4 +27,4 @@ for root, dirs, files in os.walk("."):
 if issues_found:
     exit(1)  # Fail pipeline
 else:
-    print("✅ Code looks clean!")
+    print("✅ Code ")
