@@ -22,4 +22,4 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run review
-        run: python .github/scripts/code_review.py
+        run: python scripts/code_review.py
