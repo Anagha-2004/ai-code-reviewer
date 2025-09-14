@@ -2,12 +2,14 @@ from transformers import RobertaTokenizer, RobertaForSequenceClassification
 import torch
 import os
 
-# Load pretrained CodeBERT (binary classification: good vs bad code)
+# Load pretrained CodeBERT (random classifier head unless fine-tuned)
 tokenizer = RobertaTokenizer.from_pretrained("microsoft/codebert-base")
-model = RobertaForSequenceClassification.from_pretrained("microsoft/codebert-base", num_labels=2)
+model = RobertaForSequenceClassification.from_pretrained(
+    "microsoft/codebert-base", num_labels=2
+)
 
 def review_code(file_path):
-    with open(file_path, "r") as f:
+    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
         code = f.read()
     inputs = tokenizer(code, return_tensors="pt", truncation=True, padding=True)
     outputs = model(**inputs)
